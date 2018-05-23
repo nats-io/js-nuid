@@ -1,4 +1,6 @@
 npm-debug.log
+webpack.config.js
+tsconfig.json
 
 .DS_Store
 .idea
@@ -13,4 +15,5 @@ test/
 src/
 .istanbul.yml
 .travis.yml
+
 TODO
