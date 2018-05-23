@@ -1,0 +1,12 @@
+language: node_js
+sudo: false
+
+node_js:
+  - "10"
+
+git:
+  depth: false
+
+script:
+  - npm run test
+#  - npm run coveralls

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NUID</title>
+</head>
+<body>
+
+<script src="../index.js"></script>
+
+<script>
+    n = new nuid.Nuid();
+    for (let i = 0; i < 10; i++) {
+        let pre = document.createElement("pre");
+        let t = document.createTextNode(n.next());
+        pre.appendChild(t);
+        document.body.appendChild(pre);
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+{
+  "name": "js-nuid",
+  "version": "1.0.0",
+  "description": "Nuid for javascript",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && npm run prepackage",
+    "coveralls": "nyc report --reporter=lcovonly && cat ./coverage/lcov.info | coveralls",
+    "clean": "rm -rf lib",
+    "test": "tsc && nyc ava --verbose -T 15000",
+    "debugtest": "tsc && node $NODE_DEBUG_OPTION node_modules/.bin/ava --verbose -T 6500000 -m",
+    "package": "webpack-cli && cp lib/nuid.js index.js && cp lib/src/nuid.d.ts index.d.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com//nats-io/js-nuid"
+  },
+  "keywords": [
+    "nuid",
+    "nats-io"
+  ],
+  "author": "NATS Authors",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/node": "^10.1.2",
+    "ava": "1.0.0-beta.4",
+    "browser-env": "^3.2.5",
+    "coveralls": "^3.0.1",
+    "jsdom": "^11.10.0",
+    "nyc": "^11.8.0",
+    "typescript": "^2.8.3",
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.4"
+  },
+  "ava": {
+    "require": [
+      "./lib/test/helpers/setup-browser-env.js"
+    ],
+    "files": [
+      "./lib/test/**/*.js",
+      "!./lib/test/helpers/**/*.js"
+    ],
+    "sources": [
+      "**/*.js"
+    ]
+  },
+  "dependencies": {
+    "node": "^10.1.0",
+    "ts-loader": "^4.3.0"
+  }
+}

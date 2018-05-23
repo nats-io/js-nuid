@@ -1,0 +1,16 @@
+npm-debug.log
+
+.DS_Store
+.idea
+.settings/
+.nyc_output/
+.coverrun
+.coverdata
+
+node_modules/
+examples/
+test/
+src/
+.istanbul.yml
+.travis.yml
+TODO

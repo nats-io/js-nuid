@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NUID</title>
+</head>
+<body>
+
+<script src="../index.js"></script>
+
+<script>
+
+    let n = new nuid.Nuid();
+    let start = Date.now();
+    for (let i = 0; i < 1000000; i++) {
+        n.next();
+    }
+    let h2 = document.createElement("H1");
+    let t = Date.now() - start;
+
+    let h1 = document.createElement("H1");
+    h1.appendChild(document.createTextNode(`Generated 1,000,000 nuids in ${t}ms.`));
+    document.body.appendChild(h1);
+</script>
+
+</body>
+</html>
