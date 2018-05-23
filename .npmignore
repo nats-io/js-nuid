@@ -12,7 +12,6 @@ tsconfig.json
 node_modules/
 examples/
 test/
-src/
 .istanbul.yml
 .travis.yml
 

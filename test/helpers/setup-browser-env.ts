@@ -15,14 +15,4 @@
  */
 
 let browserEnv = require('browser-env');
-
 browserEnv();
-
-//@ts-ignore
-window.crypto = {};
-//@ts-ignore
-window.crypto.getRandomValues = function(array: Uint8Array) {
-    for(let i=0; i < array.length; i++) {
-        array[i] = Math.floor(Math.random() * (255));
-    }
-};

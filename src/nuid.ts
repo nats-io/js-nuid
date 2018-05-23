@@ -20,7 +20,7 @@
 /**
  * Constants
  */
-export const VERSION = '1.0.0';
+export const VERSION = '1.0.1';
 
 
 const digits = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -33,7 +33,32 @@ const maxInc = 333;
 const totalLen = preLen + seqLen;
 
 //@ts-ignore
-const cryptoObj = window.crypto || window.msCrypto;
+const cryptoObj = initCrypto();
+
+function initCrypto() {
+    let cryptoObj = null;
+    if (window) {
+        if('crypto' in window && window.crypto.getRandomValues) {
+            cryptoObj = window.crypto;
+        } else
+            // @ts-ignore
+            if ('msCrypto' in window && window.msCrypto.getRandomValues) {
+            //@ts-ignore
+            cryptoObj = window.msCrypto;
+        }
+    }
+    if(!cryptoObj) {
+        // shim it
+        cryptoObj = {};
+        //@ts-ignore
+        cryptoObj.getRandomValues = function(array: Uint8Array) {
+            for(let i=0; i < array.length; i++) {
+                array[i] = Math.floor(Math.random() * (255));
+            }
+        };
+    }
+    return cryptoObj;
+}
 
 
 
