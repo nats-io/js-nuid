@@ -1,11 +1,12 @@
 {
   "name": "js-nuid",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Nuid for javascript",
   "main": "index.js",
   "scripts": {
-    "build": "tsc && npm run prepackage",
-    "coveralls": "nyc report --reporter=lcovonly && cat ./coverage/lcov.info | coveralls",
+    "build": "tsc && npm run package",
+    "cover:html": "nyc report --reporter=html && open coverage/index.html",
+    "cover:coveralls": "nyc report --reporter=text-lcov | coveralls",
     "clean": "rm -rf lib",
     "test": "tsc && nyc ava --verbose -T 15000",
     "debugtest": "tsc && node $NODE_DEBUG_OPTION node_modules/.bin/ava --verbose -T 6500000 -m",
@@ -22,15 +23,15 @@
   "author": "NATS Authors",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@types/node": "^10.1.2",
-    "ava": "1.0.0-beta.4",
-    "browser-env": "^3.2.5",
-    "coveralls": "^3.0.1",
-    "jsdom": "^11.10.0",
-    "nyc": "^11.8.0",
-    "typescript": "^2.8.3",
-    "webpack": "^4.8.3",
-    "webpack-cli": "^2.1.4"
+    "@types/node": "^12.7.11",
+    "ava": "^2.4.0",
+    "browser-env": "^3.2.6",
+    "coveralls": "^3.0.6",
+    "jsdom": "^15.1.1",
+    "nyc": "^14.1.1",
+    "typescript": "^3.6.3",
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9"
   },
   "ava": {
     "require": [
@@ -45,7 +46,24 @@
     ]
   },
   "dependencies": {
-    "node": "^10.1.0",
-    "ts-loader": "^4.3.0"
+    "node": "^12.11.1",
+    "ts-loader": "^6.2.0"
+  },
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".js"
+    ],
+    "include": [
+      "src/**/*.ts",
+      "lib/src/**/*.js"
+    ],
+    "exclude": [
+      "lib/test/**",
+      "examples/**",
+      "benchmark/**"
+    ],
+    "sourceMap": true,
+    "all": true
   }
 }
