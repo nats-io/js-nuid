@@ -49,7 +49,7 @@ test('global nuid should not be null', t => {
 test('duplicate nuids', t => {
     let nuid = new Nuid();
     let m = {} as {[key: string]: boolean};
-    let count = 10000;
+    let count = 100000;
     t.plan(count);
     // make this really big when testing, for normal runs small
     for(let i=0; i < count; i++) {

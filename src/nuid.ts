@@ -20,7 +20,7 @@
 /**
  * Constants
  */
-export const VERSION = '1.0.1';
+export const VERSION = '1.0.2';
 
 
 const digits = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -140,6 +140,7 @@ export class Nuid {
             this.initSeqAndInc();
         }
         this.fillSeq();
+        //@ts-ignore
         return String.fromCharCode.apply(String, this.buf);
     };
 
