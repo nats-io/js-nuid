@@ -3,15 +3,14 @@ webpack.config.js
 tsconfig.json
 
 .DS_Store
-.idea
+.idea/
 .settings/
 .nyc_output/
-.coverrun
-.coverdata
-
+coverage/
 node_modules/
 examples/
 test/
+src/
 .istanbul.yml
 .travis.yml
 
