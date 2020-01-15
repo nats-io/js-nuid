@@ -16,11 +16,10 @@
 /* jslint node: true */
 'use strict';
 
-
 /**
  * Constants
  */
-export const VERSION = '1.0.2';
+export const VERSION = '1.1.0-2';
 
 
 const digits = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';

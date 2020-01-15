@@ -14,7 +14,7 @@
  */
 
 import test from "ava";
-import {Nuid} from '../src/nuid';
+import {Nuid, VERSION} from '../src/nuid';
 
 
 function rangeEquals(ba: Uint8Array, bb: Uint8Array, start?: number, end?: number) {
@@ -98,3 +98,10 @@ test('reset should reset', t => {
     t.false(rangeEquals(a,b,0,12));
     t.false(rangeEquals(a,b,12));
 });
+
+
+test('package version', t => {
+    const v = require('../../package.json').version;
+    t.is(v, VERSION);
+});
+

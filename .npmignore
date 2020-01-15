@@ -10,8 +10,8 @@ coverage/
 node_modules/
 examples/
 test/
-src/
 .istanbul.yml
 .travis.yml
+lib/
 
 TODO
