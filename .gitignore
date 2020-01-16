@@ -1,6 +1,8 @@
 # Logs
 npm-debug.log*
 
+src/version.json
+
 # generated files
 build/
 nuid.js

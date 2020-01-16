@@ -1,25 +1,20 @@
 const path = require('path');
 
 module.exports = {
-    mode: "development",
+    mode: 'none',
     entry: path.resolve(__dirname, "src/nuid.ts"),
     output: {
-        path: path.resolve(__dirname, "lib"),
+        path: path.resolve(__dirname),
         filename: "nuid.js",
-        libraryTarget: 'this',
+        libraryTarget: 'umd',
         library: 'nuid'
     },
     resolve: {
-        extensions: [".ts", ".js"]
+        extensions: ['.ts']
     },
     module: {
         rules: [
-            {
-                test: [/\.ts$/],
-                exclude: [/test/, /node_modules/],
-                use: "ts-loader"
-            },
-            {enforce: "pre", test: /\.js$/, loader: "source-map-loader"}
+            { test: /\.ts$/, loader: "ts-loader"}
         ]
     },
     devtool: "source-map"
