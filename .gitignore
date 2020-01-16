@@ -2,10 +2,11 @@
 npm-debug.log*
 
 # generated files
-lib/
-index.d.ts
-index.js
+build/
+nuid.js
+nuid.d.ts
 nuid.js.map
+src/version.json
 
 # nyc test coverage
 .nyc_output
@@ -23,4 +24,5 @@ vcs.xml
 .DS_Store
 .idea/
 coverage/
+
 
