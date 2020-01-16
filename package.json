@@ -1,16 +1,17 @@
 {
   "name": "js-nuid",
-  "version": "1.1.0-2",
+  "version": "1.1.1-2",
   "description": "Nuid for javascript",
-  "main": "index.js",
+  "main": "nuid.js",
   "scripts": {
-    "build": "tsc && npm run package",
+    "sync_version": "node bin/version.js > src/version.json",
+    "build": "npm run sync_version && tsc && rm build/src/version.d.ts && cp build/src/*.d.ts . && npm run package",
     "cover": "nyc report --reporter=html && open coverage/index.html",
     "coveralls": "nyc report --reporter=lcovonly && cat ./coverage/lcov.info | coveralls",
-    "clean": "rm -rf lib",
+    "clean": "rm -rf lib build",
     "test": "npm run build && nyc ava --verbose -T 15000",
     "debugtest": "tsc && node $NODE_DEBUG_OPTION node_modules/.bin/ava --verbose -T 6500000 -m",
-    "package": "webpack-cli && cp lib/nuid.js index.js && cp lib/src/nuid.d.ts index.d.ts && cp lib/src/nuid.js.map nuid.js.map"
+    "package": "webpack-cli"
   },
   "repository": {
     "type": "git",
@@ -23,34 +24,31 @@
   "author": "NATS Authors",
   "license": "Apache-2.0",
   "devDependencies": {
+    "node": "^12.11.1",
+    "ts-loader": "^6.2.0",
     "@types/node": "^13.1.7",
     "ava": "^2.4.0",
     "browser-env": "^3.3.0",
     "coveralls": "^3.0.9",
-    "jsdom": "^16.0.0",
     "nyc": "^15.0.0",
-    "serialize-javascript": "^2.1.2",
     "typescript": "^3.7.4",
-    "webpack": "^4.41.0",
+    "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"
   },
   "ava": {
     "require": [
-      "./lib/test/helpers/setup-browser-env.js",
-      "./lib/test/helpers/ava_fix.js"
+      "./build/test/helpers/setup-browser-env.js",
+      "./build/test/helpers/ava_fix.js"
     ],
     "files": [
-      "./lib/test/**/*.js",
-      "!./lib/test/helpers/**/*.js"
+      "./build/test/**/*.js",
+      "!./build/test/helpers/**/*.js"
     ],
     "sources": [
-      "**/*.js"
+      "build/**/*.js"
     ]
   },
-  "dependencies": {
-    "node": "^12.11.1",
-    "ts-loader": "^6.2.0"
-  },
+  "dependencies": {},
   "nyc": {
     "extension": [
       ".ts",
@@ -58,10 +56,10 @@
     ],
     "include": [
       "src/**/*.ts",
-      "lib/src/**/*.js"
+      "build/src/**/*.js"
     ],
     "exclude": [
-      "lib/test/**",
+      "build/test/**",
       "examples/**",
       "benchmark/**"
     ],

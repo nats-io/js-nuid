@@ -1,10 +1,12 @@
 # Logs
 npm-debug.log*
 
+src/version.json
+
 # generated files
-lib/
-index.d.ts
-index.js
+build/
+nuid.d.ts
+nuid.js
 nuid.js.map
 
 # nyc test coverage
