@@ -1,5 +1,5 @@
 /*
-* Copyright 2016-2018 The NATS Authors
+* Copyright 2016-2020 The NATS Authors
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -13,13 +13,12 @@
 * limitations under the License.
 */
 
-/* jslint node: true */
 'use strict';
 
 /**
  * Constants
  */
-export const VERSION = '1.1.0-2';
+export const VERSION = require('./version.json').version;
 
 
 const digits = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -31,7 +30,6 @@ const minInc = 33;
 const maxInc = 333;
 const totalLen = preLen + seqLen;
 
-//@ts-ignore
 const cryptoObj = initCrypto();
 
 function initCrypto() {
@@ -48,13 +46,13 @@ function initCrypto() {
     }
     if(!cryptoObj) {
         // shim it
-        cryptoObj = {};
-        //@ts-ignore
-        cryptoObj.getRandomValues = function(array: Uint8Array) {
-            for(let i=0; i < array.length; i++) {
-                array[i] = Math.floor(Math.random() * (255));
+        cryptoObj = {
+            getRandomValues: function (array: Uint8Array) {
+                for (let i = 0; i < array.length; i++) {
+                    array[i] = Math.floor(Math.random() * (255));
+                }
             }
-        };
+        }
     }
     return cryptoObj;
 }

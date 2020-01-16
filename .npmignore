@@ -12,6 +12,7 @@ examples/
 test/
 .istanbul.yml
 .travis.yml
-lib/
+build/
+bin/
 
 TODO
