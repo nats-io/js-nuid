@@ -45,7 +45,7 @@
       "!./build/test/helpers/**/*.js"
     ],
     "sources": [
-      "src/*.js"
+      "build/**/*.js"
     ]
   },
   "dependencies": {},
