@@ -5,9 +5,10 @@ src/version.json
 
 # generated files
 build/
-nuid.d.ts
 nuid.js
+nuid.d.ts
 nuid.js.map
+src/version.json
 
 # nyc test coverage
 .nyc_output
@@ -25,4 +26,5 @@ vcs.xml
 .DS_Store
 .idea/
 coverage/
+
 
