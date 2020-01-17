@@ -8,7 +8,7 @@
     "build": "npm run sync_version && tsc && rm build/src/version.d.ts && cp build/src/*.d.ts . && npm run package",
     "cover": "nyc report --reporter=html && open coverage/index.html",
     "coveralls": "nyc report --reporter=lcovonly && cat ./coverage/lcov.info | coveralls",
-    "clean": "rm -rf lib build",
+    "clean": "rm -rf build .nyc_output coverage && rm src/version.json ./nuid.js ./nuid.js.map ./nuid.d.ts",
     "test": "npm run build && nyc ava --verbose -T 15000",
     "debugtest": "tsc && node $NODE_DEBUG_OPTION node_modules/.bin/ava --verbose -T 6500000 -m",
     "package": "webpack-cli"
@@ -24,7 +24,6 @@
   "author": "NATS Authors",
   "license": "Apache-2.0",
   "devDependencies": {
-    "node": "^12.11.1",
     "ts-loader": "^6.2.0",
     "@types/node": "^13.1.7",
     "ava": "^2.4.0",
