@@ -6,31 +6,33 @@
 [![npm](https://img.shields.io/npm/v/js-nuid.svg)](https://www.npmjs.com/package/nats)
 [![npm](https://img.shields.io/npm/dt/js-nuid.svg)](https://www.npmjs.com/package/nats)
 
-A highly performant unique identifier generator.
+A highly performant unique identifier generator, packaged as an ES Module.
 
 ## Installation
 
 Use the `npm` command:
-
-	$ npm install js-nuid
+```bash
+$ npm install js-nuid
+```
 
 ## Basic Usage
-```html
-<script src="../index.js"></script>
 
-<script>
-    n = new nuid.Nuid();
-    for (let i = 0; i < 10; i++) {
-        let pre = document.createElement("pre");
-        let t = document.createTextNode(n.next());
-        pre.appendChild(t);
-        document.body.appendChild(pre);
-    }
+```html
+<script type="module">
+  import { Nuid } from '../index.js'
+  const n = new Nuid();
+  for (let i = 0; i < 10; i++) {
+    let pre = document.createElement("pre");
+    let t = document.createTextNode(n.next());
+    pre.appendChild(t);
+    document.body.appendChild(pre);
+  }
 </script>
 ```
 
 
 ## Performance
+
 NUID needs to be very fast to generate and be truly unique, all while being entropy pool friendly.
 NUID uses 12 bytes of crypto generated data (entropy draining), and 10 bytes of pseudo-random
 sequential data that increments with a pseudo-random increment.
@@ -44,20 +46,42 @@ The library uses `crypto` to generate random numbers. Current support for crypto
 can be found here: [https://caniuse.com/#search=crypto](https://caniuse.com/#search=crypto).
 
 If you want to target other browsers, you can shim an implementation of `crypto.getRandomValues()`
-such as the one below. However your performance and entropy will vary.
+such as the one below. However, your performance and entropy will vary.
 
 ```javascript
-window.crypto.getRandomValues = function(array) {
+globalThis.crypto.getRandomValues = function(array) {
     for(let i=0; i < array.length; i++) {
         array[i] = Math.floor(Math.random() * (255));
     }
 };
 ```
 
+## Deno
+
+This library is fully compliant with [Deno](https://deno.land). As an internal tidbit,
+all of the node machinery used for building and testing this library has been ported to
+Deno, as it simplifies all the tooling and dependencies.
+
 ## Supported Node Versions
+
+If targeting nodejs, take a look at [node-nuid](https://github.com/nats-io/node-nuid).
+If targeting cross-environments, this library may be more appropriate, however it requires node versions > 13.
+At the time of this release, ES modules is still an experimental feature in Node.
+
+```javascript
+import { Nuid } from "js-nuid";
+const n = new Nuid();
+console.log(n.next());
+```
 
 Our support policy for Nodejs versions follows [Nodejs release support]( https://github.com/nodejs/Release).
 We will support and build node-nats on even-numbered Nodejs versions that are current or in LTS.
+
+## Running Tests
+
+If you want to run the tests locally, you'll need to install [Deno](https://deno.land).
+You can then issue `npm test` to run the tests.
+
 
 ## License
 

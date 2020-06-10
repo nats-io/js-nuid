@@ -16,10 +16,10 @@
 import {
   assert,
   assertEquals,
-  assertNotEquals
+  assertNotEquals,
 } from "https://deno.land/std/testing/asserts.ts";
 
-import { Nuid } from "../src/nuid.js";
+import { Nuid } from "../index.js";
 
 function rangeEquals(
   ba: Uint8Array,
@@ -67,7 +67,6 @@ Deno.test("duplicate nuids", () => {
 
 Deno.test("roll seq", () => {
   let nuid = new Nuid();
-
   let a = new Uint8Array(10);
   a.set(nuid.buf.slice(12, 22), 0);
   nuid.next();
@@ -78,7 +77,6 @@ Deno.test("roll seq", () => {
 
 Deno.test("roll pre", () => {
   let nuid = new Nuid();
-
   nuid.seq = 3656158440062976 + 1;
   let a = new Uint8Array(12);
   a.set(nuid.buf.slice(0, 12), 0);
@@ -99,8 +97,6 @@ Deno.test("reset should reset", () => {
   let b = new Uint8Array(12);
   b.set(nuid.buf.slice(0, 12), 0);
   assertEquals(b.length, 12);
-
   assert(!rangeEquals(a, b, 0, 12));
   assert(!rangeEquals(a, b, 12));
 });
-

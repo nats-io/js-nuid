@@ -1,0 +1,48 @@
+name: js-nuid
+
+on:
+  push:
+    tags:
+      - '*'
+    branches:
+      - '*'
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    name: ${{ matrix.config.kind }} ${{ matrix.config.os }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        deno-version: [1.0.5]
+
+    steps:
+      - name: Git Checkout Deno Module
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - name: Use Deno Version ${{ matrix.deno-version }}
+        uses: denolib/setup-deno@master
+        with:
+          deno-version: ${{ matrix.deno-version }}
+
+      - name: Lint Deno Module
+        run: deno fmt --check
+
+      - name: Test Deno Module
+        run: deno test
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: |
+          startsWith(github.ref, 'refs/tags/') &&
+          !startsWith(github.ref, 'refs/tags/std/')
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: |
+            index.js
+          draft: true
