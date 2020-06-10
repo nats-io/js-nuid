@@ -23,46 +23,7 @@
   ],
   "author": "NATS Authors",
   "license": "Apache-2.0",
-  "devDependencies": {
-    "ts-loader": "^6.2.0",
-    "@types/node": "^13.1.7",
-    "ava": "^2.4.0",
-    "browser-env": "^3.3.0",
-    "coveralls": "^3.0.9",
-    "nyc": "^15.0.0",
-    "typescript": "^3.7.4",
-    "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10"
-  },
-  "ava": {
-    "require": [
-      "./build/test/helpers/setup-browser-env.js",
-      "./build/test/helpers/ava_fix.js"
-    ],
-    "files": [
-      "./build/test/**/*.js",
-      "!./build/test/helpers/**/*.js"
-    ],
-    "sources": [
-      "build/**/*.js"
-    ]
-  },
-  "dependencies": {},
-  "nyc": {
-    "extension": [
-      ".ts",
-      ".js"
-    ],
-    "include": [
-      "src/**/*.ts",
-      "build/src/**/*.js"
-    ],
-    "exclude": [
-      "build/test/**",
-      "examples/**",
-      "benchmark/**"
-    ],
-    "sourceMap": true,
-    "all": true
+  "dependencies": {
+    "standard": "^14.3.4"
   }
 }

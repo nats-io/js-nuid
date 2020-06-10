@@ -13,15 +13,14 @@
 * limitations under the License.
 */
 
-'use strict';
+"use strict";
 
 /**
  * Constants
  */
-export const VERSION = require('./version.json').version;
+const VERSION = "1.1.1";
 
-
-const digits = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const base = 36;
 const preLen = 12;
 const seqLen = 10;
@@ -35,40 +34,31 @@ const cryptoObj = initCrypto();
 function initCrypto() {
     let cryptoObj = null;
     if (window) {
-        if('crypto' in window && window.crypto.getRandomValues) {
+        if ("crypto" in window && window.crypto.getRandomValues) {
             cryptoObj = window.crypto;
-        } else
-            // @ts-ignore
-            if ('msCrypto' in window && window.msCrypto.getRandomValues) {
-            //@ts-ignore
+        } else if ("msCrypto" in window && window.msCrypto.getRandomValues) {
             cryptoObj = window.msCrypto;
         }
     }
-    if(!cryptoObj) {
+    if (!cryptoObj) {
         // shim it
         cryptoObj = {
-            getRandomValues: function (array: Uint8Array) {
+            getRandomValues: function (array) {
                 for (let i = 0; i < array.length; i++) {
                     array[i] = Math.floor(Math.random() * (255));
                 }
-            }
-        }
+            },
+        };
     }
     return cryptoObj;
 }
-
-
 
 /**
  * Create and initialize a nuid.
  *
  * @api private
  */
-export class Nuid {
-    buf: Uint8Array;
-    seq!: number;
-    inc!: number;
-
+class Nuid {
     constructor() {
         this.buf = new Uint8Array(totalLen);
         this.init();
@@ -80,7 +70,7 @@ export class Nuid {
      *
      * @api private
      */
-    private init() {
+    init() {
         this.setPre();
         this.initSeqAndInc();
         this.fillSeq();
@@ -91,71 +81,56 @@ export class Nuid {
      *
      * @api private
      */
-    private initSeqAndInc() {
+    initSeqAndInc() {
         this.seq = Math.floor(Math.random() * maxSeq);
         this.inc = Math.floor(Math.random() * (maxInc - minInc) + minInc);
     }
-
 
     /**
      * Sets the prefix from crypto random bytes. Converts to base36.
      *
      * @api private
      */
-    private setPre() {
+    setPre() {
         let cbuf = new Uint8Array(preLen);
         cryptoObj.getRandomValues(cbuf);
         for (let i = 0; i < preLen; i++) {
             let di = cbuf[i] % base;
             this.buf[i] = digits.charCodeAt(di);
         }
-    };
-
+    }
 
     /**
      * Fills the sequence part of the nuid as base36 from this.seq.
      *
      * @api private
      */
-    private fillSeq() {
+    fillSeq() {
         let n = this.seq;
         for (let i = totalLen - 1; i >= preLen; i--) {
             this.buf[i] = digits.charCodeAt(n % base);
             n = Math.floor(n / base);
         }
-    };
+    }
 
     /**
      * Returns the next nuid.
      *
      * @api private
      */
-    next(): string {
+    next() {
         this.seq += this.inc;
         if (this.seq > maxSeq) {
             this.setPre();
             this.initSeqAndInc();
         }
         this.fillSeq();
-        //@ts-ignore
         return String.fromCharCode.apply(String, this.buf);
-    };
+    }
 
     reset() {
         this.init();
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+export {Nuid, VERSION}

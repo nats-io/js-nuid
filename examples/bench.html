@@ -5,12 +5,10 @@
     <title>NUID</title>
 </head>
 <body>
+<script type="module">
+    import { Nuid } from '../src/nuid.js';
 
-<script src="../nuid.js"></script>
-
-<script>
-
-    let n = new nuid.Nuid();
+    let n = new Nuid();
     let start = Date.now();
     for (let i = 0; i < 1000000; i++) {
         n.next();
@@ -22,6 +20,5 @@
     h1.appendChild(document.createTextNode(`Generated 1,000,000 nuids in ${t}ms.`));
     document.body.appendChild(h1);
 </script>
-
 </body>
 </html>

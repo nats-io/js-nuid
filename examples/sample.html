@@ -5,18 +5,15 @@
     <title>NUID</title>
 </head>
 <body>
-
-<script src="../nuid.js"></script>
-
-<script>
-    n = new nuid.Nuid();
-    for (let i = 0; i < 10; i++) {
-        let pre = document.createElement("pre");
-        let t = document.createTextNode(n.next());
-        pre.appendChild(t);
-        document.body.appendChild(pre);
-    }
+<script type="module">
+  import { Nuid } from '../src/nuid.js'
+  const n = new Nuid();
+  for (let i = 0; i < 10; i++) {
+    let pre = document.createElement("pre");
+    let t = document.createTextNode(n.next());
+    pre.appendChild(t);
+    document.body.appendChild(pre);
+  }
 </script>
-
 </body>
 </html>
