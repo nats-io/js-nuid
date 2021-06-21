@@ -3,8 +3,8 @@
 [![license](https://img.shields.io/github/license/nats-io/js-nuid.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 [![Travis branch](https://img.shields.io/travis/nats-io/js-nuid/master.svg)]()
 [![Coveralls github branch](https://img.shields.io/coveralls/github/nats-io/js-nuid/master.svg)]()
-[![npm](https://img.shields.io/npm/v/js-nuid.svg)](https://www.npmjs.com/package/nats)
-[![npm](https://img.shields.io/npm/dt/js-nuid.svg)](https://www.npmjs.com/package/nats)
+[![npm](https://img.shields.io/npm/v/js-nuid.svg)](https://www.npmjs.com/package/js-nuid)
+[![npm](https://img.shields.io/npm/dt/js-nuid.svg)](https://www.npmjs.com/package/js-nuid)
 
 A highly performant unique identifier generator.
 
