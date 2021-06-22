@@ -18,7 +18,7 @@
 /**
  * Constants
  */
-export const VERSION = require('./version.json').version;
+export const VERSION = "1.1.2";
 
 
 const digits = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -34,7 +34,7 @@ const cryptoObj = initCrypto();
 
 function initCrypto() {
     let cryptoObj = null;
-    if (window) {
+    if (typeof window !== undefined) {
         if('crypto' in window && window.crypto.getRandomValues) {
             cryptoObj = window.crypto;
         } else
